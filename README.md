@@ -76,7 +76,9 @@ Cet atelier explore l'utilisation de **jQuery** et d'**AJAX** à travers quatre 
 
 ## ✍️ Auteurs
 
-- **👨‍💻 AICH Fadi** — ENSIT
+- **👨‍💻 AICH Fadi**
+- **👨‍💻ELHAMDOUCHI Ilyasse**
+- **👨‍💻EL BADRE Anas**
 
 ---
 
