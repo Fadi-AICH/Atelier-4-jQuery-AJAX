@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire d'inscription</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h2>Formulaire d'inscription</h2>
+  <form id="formInscription">
+    <input name="nom" placeholder="Nom"><br>
+    <input name="prenom" placeholder="Prénom"><br>
+    <input name="adresse" placeholder="Adresse"><br>
+    <input name="email" placeholder="Email"><br>
+    <input name="login" placeholder="Login"><br>
+    <input name="password" type="password" placeholder="Mot de passe"><br>
+    <input name="confirm" type="password" placeholder="Confirmer mot de passe"><br>
+    <input name="telephone" placeholder="Téléphone"><br>
+    <select name="civilite">
+      <option value="">-- Civilité --</option>
+      <option value="M">M</option>
+      <option value="Mme">Mme</option>
+    </select><br>
+    <input name="pays" placeholder="Pays"><br>
+    <button type="submit">Valider</button>
+  </form>
+  <div id="erreurs" style="color:red"></div>
+
+  <script>
+    $('#formInscription').submit(function(e) {
+      e.preventDefault();
+      let erreurs = '';
+      let emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      let telRegex = /^[0-9]{10}$/;
+
+      $('#formInscription input, #formInscription select').each(function () {
+        if ($(this).val() === '') {
+          erreurs += 'Le champ ' + $(this).attr('name') + ' est requis.<br>';
+        }
+      });
+
+      if (!emailRegex.test($('input[name="email"]').val()))
+        erreurs += "Email invalide.<br>";
+
+      if (!telRegex.test($('input[name="telephone"]').val()))
+        erreurs += "Téléphone invalide (10 chiffres).<br>";
+
+      if ($('input[name="password"]').val() !== $('input[name="confirm"]').val())
+        erreurs += "Les mots de passe ne correspondent pas.<br>";
+
+      $('#erreurs').html(erreurs === '' ? "Formulaire valide !" : erreurs);
+    });
+  </script>
+</body>
+</html>

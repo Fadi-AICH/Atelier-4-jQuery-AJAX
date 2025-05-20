@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>QCM</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .question { margin: 10px 0; padding: 5px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>QCM - jQuery</h2>
+  <form id="qcmForm">
+    
+    <div class="question" data-correct="a">
+      <p>1. Le HTML est ?</p>
+      <label><input type="radio" name="q1" value="a">Un langage de balisage</label><br>
+      <label><input type="radio" name="q1" value="b">Un système d'exploitation</label><br>
+      <label><input type="radio" name="q1" value="c">Un navigateur</label>
+    </div>
+
+    <div class="question" data-correct="b">
+      <p>2. jQuery est ?</p>
+      <label><input type="radio" name="q2" value="a">Un langage de programmation</label><br>
+      <label><input type="radio" name="q2" value="b">Une bibliothèque JavaScript</label><br>
+      <label><input type="radio" name="q2" value="c">Un logiciel de traitement de texte</label>
+    </div>
+
+    <div class="question" data-correct="c">
+      <p>3. Quelle est la bonne syntaxe pour sélectionner un élément par ID avec jQuery ?</p>
+      <label><input type="radio" name="q3" value="a">getElementById("#id")</label><br>
+      <label><input type="radio" name="q3" value="b">document.id("id")</label><br>
+      <label><input type="radio" name="q3" value="c">$("#id")</label>
+    </div>
+
+    <div class="question" data-correct="b">
+      <p>4. Quelle méthode jQuery permet de cacher un élément ?</p>
+      <label><input type="radio" name="q4" value="a">.remove()</label><br>
+      <label><input type="radio" name="q4" value="b">.hide()</label><br>
+      <label><input type="radio" name="q4" value="c">.delete()</label>
+    </div>
+
+    <div class="question" data-correct="a">
+      <p>5. Quelle extension est nécessaire pour inclure jQuery dans un fichier HTML ?</p>
+      <label><input type="radio" name="q5" value="a">.js</label><br>
+      <label><input type="radio" name="q5" value="b">.html</label><br>
+      <label><input type="radio" name="q5" value="c">.php</label>
+    </div>
+
+    <button type="button" id="corriger">Corriger</button>
+  </form>
+
+  <div id="note" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    $('#corriger').click(function () {
+      let total = $('.question').length;
+      let score = 0;
+      let incomplet = false;
+
+      $('.question').each(function () {
+        let correct = $(this).data('correct');
+        let selected = $(this).find('input:checked');
+        $(this).css('background', '');
+        $(this).find('label').css('color', 'black');
+
+        if (selected.length === 0) {
+          $(this).css('background', 'orange');
+          incomplet = true;
+        } else if (selected.val() === correct) {
+          $(this).css('background', 'lightgreen');
+          selected.parent().css('color', 'green');
+          score++;
+        } else {
+          $(this).css('background', 'lightcoral');
+          selected.parent().css('color', 'red');
+          $(this).find('input[value="' + correct + '"]').parent().css('color', 'green');
+        }
+      });
+
+      $('#note').html(incomplet ? "Veuillez répondre à toutes les questions." : `Note : ${score} / ${total}`);
+
+    });
+  </script>
+</body>
+</html>
